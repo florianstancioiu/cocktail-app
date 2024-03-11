@@ -33,13 +33,20 @@ const Products = ({ searchKeyword, addToCart }) => {
     </div>
     <style>
       .products-wrapper {
-        min-height: 200px;
+        min-height: 100px;
         border: 1px solid black;
         padding: 20px;
       }
+
+      app-product {
+        margin-bottom: 20px;
+        display: block;
+      }
+
+      app-product:last-child {
+        margin-bottom: 0;
+      }
     </style> `;
 };
-
-Products.observedAttributes = ['search-keyword'];
 
 export default Products;

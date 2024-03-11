@@ -24,7 +24,6 @@ const Product = ({ cocktailData, addToCart }) => {
       .product-wrapper {
         display: grid;
         grid-template-columns: 2fr 4fr 1fr;
-        margin-bottom: 20px;
         border: 1px solid black;
         padding-right: 20px;
       }

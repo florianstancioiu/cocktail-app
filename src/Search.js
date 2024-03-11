@@ -32,6 +32,4 @@ const Search = ({ updateKeyword, searchKeyword }) => {
     </style> `;
 };
 
-Search.observedAttributes = ['search-keyword'];
-
 export default Search;

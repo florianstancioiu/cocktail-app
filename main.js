@@ -1,6 +1,8 @@
 import { html } from 'lit';
 import { component, useState } from '@pionjs/pion';
 import { getCocktailIngredients, capitalize } from './helpers';
+import 'toastify-js/src/toastify.css';
+import Toastify from 'toastify-js';
 
 import Search from './src/Search';
 import Product from './src/Product';
@@ -15,7 +17,7 @@ customElements.define('app-shopping-list', component(ShoppingList));
 customElements.define('app-shopping-list-item', component(ShoppingListItem));
 
 const App = () => {
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const [searchKeyword, setSearchKeyword] = useState('Margarita');
   const [cart, setCart] = useState([]);
 
   const updateKeyword = (value) => {
@@ -34,6 +36,11 @@ const App = () => {
     );
 
     setCart(uniqueIngredients);
+
+    Toastify({
+      text: 'Ingredients added to cart',
+      duration: 2000,
+    }).showToast();
   };
 
   const removeCartItemHandler = (ingredient) => {
@@ -46,6 +53,11 @@ const App = () => {
     });
 
     setCart(filteredCart);
+
+    Toastify({
+      text: 'Ingredient removed from cart',
+      duration: 2000,
+    }).showToast();
   };
 
   return html`<div class="wrapper">
