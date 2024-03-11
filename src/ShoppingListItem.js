@@ -1,9 +1,9 @@
 import { html } from 'lit';
 
-const ShoppingListItem = ({ theIngredient }) => {
+const ShoppingListItem = ({ theIngredient, removeItem }) => {
   return html`<div class="shopping-list-item-wrapper">
       <p>${theIngredient}</p>
-      <button>Remove</button>
+      <button @click=${() => removeItem(theIngredient)}>Remove</button>
     </div>
     <style>
       .shopping-list-item-wrapper {

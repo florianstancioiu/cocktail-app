@@ -1,10 +1,6 @@
 import { html } from 'lit';
 
 const ShoppingList = ({ cartItems, removeItem }) => {
-  const printShoppingList = () => {
-    window.print();
-  };
-
   return html`<div class="shopping-list-wrapper">
       <div class="shopping-list-inner">
         <h1>Shopping List</h1>
@@ -19,7 +15,7 @@ const ShoppingList = ({ cartItems, removeItem }) => {
           : html`<h3>The cart is empty</h3>`}
       </div>
       ${cartItems.length > 0
-        ? html`<button class="print-btn" @click=${printShoppingList}>
+        ? html`<button class="print-btn" @click=${() => window.print()}>
             Print
           </button>`
         : ``}

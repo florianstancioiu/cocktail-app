@@ -1,6 +1,6 @@
 import { html } from 'lit';
 import { component, useState } from '@pionjs/pion';
-import { getCocktailIngredients } from './helpers';
+import { getCocktailIngredients, capitalize } from './helpers';
 
 import Search from './src/Search';
 import Product from './src/Product';
@@ -25,9 +25,27 @@ const App = () => {
   const addToCart = (cocktail) => {
     const currentIngredients = getCocktailIngredients(cocktail);
     const allIngredients = [...cart, ...currentIngredients];
-    const uniqueIngredients = [...new Set(allIngredients)];
+    let uniqueIngredients = [
+      ...new Set(allIngredients.map((ingredient) => ingredient.toLowerCase())),
+    ];
+
+    uniqueIngredients = uniqueIngredients.map((ingredient) =>
+      capitalize(ingredient)
+    );
 
     setCart(uniqueIngredients);
+  };
+
+  const removeCartItemHandler = (ingredient) => {
+    const filteredCart = cart.filter((cartIngredient) => {
+      if (cartIngredient === ingredient) {
+        return false;
+      }
+
+      return true;
+    });
+
+    setCart(filteredCart);
   };
 
   return html`<div class="wrapper">
@@ -40,7 +58,10 @@ const App = () => {
           .addToCart=${addToCart}
           search-keyword=${searchKeyword}
         ></app-products>
-        <app-shopping-list .cartItems=${cart}></app-shopping-list>
+        <app-shopping-list
+          .cartItems=${cart}
+          .removeItem=${removeCartItemHandler}
+        ></app-shopping-list>
       </div>
     </div>
     <style>
