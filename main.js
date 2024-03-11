@@ -1,24 +1,41 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import { html } from 'lit';
+import { component, useState } from '@pionjs/pion';
+import './style.css';
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
+import Search from './src/Search';
+import Product from './src/Product';
+import Products from './src/Products';
+import ShoppingList from './src/ShoppingList';
+import ShoppingListItem from './src/ShoppingListItem';
+
+customElements.define('app-search', component(Search));
+customElements.define('app-product', component(Product));
+customElements.define('app-products', component(Products));
+customElements.define('app-shopping-list', component(ShoppingList));
+customElements.define('app-shopping-list-item', component(ShoppingListItem));
+
+const App = () => {
+  const [searchKeyword, setSearchKeyword] = useState('mojito');
+
+  return html`<div class="wrapper">
+      <app-search></app-search>
+      <div class="main">
+        <app-products search-keyword=${searchKeyword}></app-products>
+        <app-shopping-list></app-shopping-list>
+      </div>
     </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+    <style>
+      .wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+      }
 
-setupCounter(document.querySelector('#counter'))
+      .main {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 20px;
+      }
+    </style>`;
+};
+
+customElements.define('main-app', component(App));
