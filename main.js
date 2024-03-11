@@ -1,6 +1,5 @@
 import { html } from 'lit';
 import { component, useState } from '@pionjs/pion';
-import './style.css';
 
 import Search from './src/Search';
 import Product from './src/Product';
@@ -16,12 +15,27 @@ customElements.define('app-shopping-list-item', component(ShoppingListItem));
 
 const App = () => {
   const [searchKeyword, setSearchKeyword] = useState('mojito');
+  const [cart, setCart] = useState([]);
+
+  const updateKeyword = (value) => {
+    setSearchKeyword(value);
+  };
+
+  const addToCart = (cocktail) => {
+    setCart([...cart, cocktail]);
+  };
 
   return html`<div class="wrapper">
-      <app-search></app-search>
+      <app-search
+        .updateKeyword=${updateKeyword}
+        search-keyword=${searchKeyword}
+      ></app-search>
       <div class="main">
-        <app-products search-keyword=${searchKeyword}></app-products>
-        <app-shopping-list></app-shopping-list>
+        <app-products
+          .addToCart=${addToCart}
+          search-keyword=${searchKeyword}
+        ></app-products>
+        <app-shopping-list .cartItems=${cart}></app-shopping-list>
       </div>
     </div>
     <style>
@@ -32,7 +46,7 @@ const App = () => {
 
       .main {
         display: grid;
-        grid-template-columns: 3fr 2fr;
+        grid-template-columns: 4fr 2fr;
         gap: 20px;
       }
     </style>`;
