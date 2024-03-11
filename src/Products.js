@@ -8,10 +8,14 @@ const Products = ({ searchKeyword, addToCart }) => {
 
   useEffect(() => {
     const getData = setTimeout(async () => {
+      if (searchKeyword === '') {
+        return false;
+      }
+
       const response = await fetch(`${url}${searchKeyword}`);
       const cocktailsData = await response.json();
 
-      setCocktails(cocktailsData?.drinks);
+      setCocktails(cocktailsData?.drinks === null ? [] : cocktailsData?.drinks);
     }, 500);
 
     return () => clearTimeout(getData);

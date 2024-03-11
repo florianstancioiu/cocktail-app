@@ -12,7 +12,7 @@ const Product = ({ cocktailData, addToCart }) => {
         <img class="image" src=${strDrinkThumb} alt=${strDrink} />
       </div>
       <div class="details">
-        <p>${idDrink}</p>
+        <p class="drink-id">${idDrink}</p>
         <p class="title">${strDrink}</p>
         <p class="instructions">${strInstructions}</p>
       </div>
@@ -31,6 +31,10 @@ const Product = ({ cocktailData, addToCart }) => {
 
       .details {
         padding-right: 20px;
+      }
+
+      .drink-id {
+        font-size: 12px;
       }
 
       .image-wrapper,

@@ -50,13 +50,13 @@ const App = () => {
 
   return html`<div class="wrapper">
       <app-search
+        .searchKeyword=${searchKeyword}
         .updateKeyword=${updateKeyword}
-        search-keyword=${searchKeyword}
       ></app-search>
       <div class="main">
         <app-products
+          .searchKeyword=${searchKeyword}
           .addToCart=${addToCart}
-          search-keyword=${searchKeyword}
         ></app-products>
         <app-shopping-list
           .cartItems=${cart}

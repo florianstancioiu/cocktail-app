@@ -5,12 +5,15 @@ const Search = ({ updateKeyword, searchKeyword }) => {
       <input
         type="text"
         value=${searchKeyword}
-        @change=${(event) => {
-          updateKeyword(event.target.value);
-        }}
+        @change=${(event) => updateKeyword(event.target.value)}
         class="search-input"
       />
-      <button class="search-button" @click=${() => {}}>Search</button>
+      <button
+        class="search-button"
+        @click=${() => updateKeyword(searchKeyword)}
+      >
+        Search
+      </button>
     </div>
     <style>
       .search-wrapper {
