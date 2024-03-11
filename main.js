@@ -1,5 +1,6 @@
 import { html } from 'lit';
 import { component, useState } from '@pionjs/pion';
+import { getCocktailIngredients } from './helpers';
 
 import Search from './src/Search';
 import Product from './src/Product';
@@ -22,7 +23,11 @@ const App = () => {
   };
 
   const addToCart = (cocktail) => {
-    setCart([...cart, cocktail]);
+    const currentIngredients = getCocktailIngredients(cocktail);
+    const allIngredients = [...cart, ...currentIngredients];
+    const uniqueIngredients = [...new Set(allIngredients)];
+
+    setCart(uniqueIngredients);
   };
 
   return html`<div class="wrapper">
@@ -48,6 +53,13 @@ const App = () => {
         display: grid;
         grid-template-columns: 4fr 2fr;
         gap: 20px;
+      }
+
+      @media print {
+        app-search,
+        app-products {
+          display: none;
+        }
       }
     </style>`;
 };

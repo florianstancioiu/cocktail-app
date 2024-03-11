@@ -1,17 +1,27 @@
 import { html } from 'lit';
 
-const ShoppingList = ({ cartItems }) => {
+const ShoppingList = ({ cartItems, removeItem }) => {
+  const printShoppingList = () => {
+    window.print();
+  };
+
   return html`<div class="shopping-list-wrapper">
       <div class="shopping-list-inner">
         <h1>Shopping List</h1>
         ${cartItems.length > 0
           ? cartItems.map(
-              (item) => html`<app-shopping-list-item .itemData=${item} />`
+              (item) =>
+                html`<app-shopping-list-item
+                  the-ingredient=${item}
+                  .removeItem=${(value) => removeItem(value)}
+                />`
             )
           : html`<h3>The cart is empty</h3>`}
       </div>
       ${cartItems.length > 0
-        ? html`<button class="print-btn">Print</button>`
+        ? html`<button class="print-btn" @click=${printShoppingList}>
+            Print
+          </button>`
         : ``}
     </div>
     <style>
@@ -19,6 +29,12 @@ const ShoppingList = ({ cartItems }) => {
         min-height: 200px;
         border: 1px solid black;
         padding: 20px;
+      }
+
+      .print-btn {
+        width: 100%;
+        height: 40px;
+        line-height: 34px;
       }
     </style>`;
 };
