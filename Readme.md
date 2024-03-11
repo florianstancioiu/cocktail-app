@@ -1,4 +1,4 @@
-# Instalation intructions
+# Installation instructions
 
 1. `git clone <repo>`
 2. `npm install`
