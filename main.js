@@ -15,7 +15,7 @@ customElements.define('app-shopping-list', component(ShoppingList));
 customElements.define('app-shopping-list-item', component(ShoppingListItem));
 
 const App = () => {
-  const [searchKeyword, setSearchKeyword] = useState('mojito');
+  const [searchKeyword, setSearchKeyword] = useState('');
   const [cart, setCart] = useState([]);
 
   const updateKeyword = (value) => {

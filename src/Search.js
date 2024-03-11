@@ -1,12 +1,8 @@
 import { html } from 'lit';
-import { useRef } from '@pionjs/pion';
 
 const Search = ({ updateKeyword, searchKeyword }) => {
-  const inputRef = useRef(null);
-
   return html`<div class="search-wrapper">
       <input
-        ref=${inputRef}
         type="text"
         value=${searchKeyword}
         @change=${(event) => {
@@ -14,15 +10,7 @@ const Search = ({ updateKeyword, searchKeyword }) => {
         }}
         class="search-input"
       />
-      <button
-        class="search-button"
-        @click=${() => {
-          console.log(inputRef);
-          //updateKeyword(inputRef.current.target.value)
-        }}
-      >
-        Search
-      </button>
+      <button class="search-button" @click=${() => {}}>Search</button>
     </div>
     <style>
       .search-wrapper {
